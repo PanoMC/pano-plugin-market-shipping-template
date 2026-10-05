@@ -1,0 +1,72 @@
+{
+  "kind": "SELF_DERIVED",
+  "source": "Written from the status table of VERIFICATION.md. Example Carrier is imaginary, so there is no official documentation to copy a sample from.",
+  "statuses": [
+    { "raw": "draft", "expected": "CREATED" },
+    { "raw": "created", "expected": "CREATED" },
+    { "raw": "purchased", "expected": "LABEL_READY" },
+    { "raw": "label_ready", "expected": "LABEL_READY" },
+    { "raw": "picked_up", "expected": "IN_TRANSIT" },
+    { "raw": "in_transit", "expected": "IN_TRANSIT" },
+    { "raw": "at_hub", "expected": "IN_TRANSIT" },
+    { "raw": "out_for_delivery", "expected": "OUT_FOR_DELIVERY" },
+    { "raw": "delivered", "expected": "DELIVERED" },
+    { "raw": "delivery_failed", "expected": "EXCEPTION" },
+    { "raw": "exception", "expected": "EXCEPTION" },
+    { "raw": "held", "expected": "EXCEPTION" },
+    { "raw": "customs_hold", "expected": "EXCEPTION" },
+    { "raw": "returning", "expected": "RETURNING" },
+    { "raw": "return_to_sender", "expected": "RETURNING" },
+    { "raw": "returned", "expected": "RETURNED" },
+    { "raw": "cancelled", "expected": "CANCELLED" },
+    { "raw": "voided", "expected": "CANCELLED" },
+    { "raw": "lost", "expected": "LOST" },
+    { "raw": "DELIVERED", "expected": "DELIVERED" },
+    { "raw": " In_Transit ", "expected": "IN_TRANSIT" },
+    { "raw": "teleported", "expected": null },
+    { "raw": "", "expected": null }
+  ],
+  "shipments": [
+    {
+      "name": "two events, newest last",
+      "shipment": {
+        "id": "shp_1",
+        "status": "out_for_delivery",
+        "trackingNumber": "EC0001",
+        "trackingUrl": "https://track.examplecarrier.example/EC0001",
+        "estimatedDelivery": 1760086400,
+        "events": [
+          { "id": "ev_1", "status": "picked_up", "time": 1760000000, "description": "Picked up", "location": "Berlin" },
+          { "id": "ev_2", "status": "out_for_delivery", "time": 1760040000, "location": "Hamburg" }
+        ]
+      },
+      "expected": {
+        "trackingNumber": "EC0001",
+        "estimatedDeliveryMs": 1760086400000,
+        "events": [
+          { "eventId": "ev_1", "status": "IN_TRANSIT", "rawStatus": "picked_up", "occurredAtMs": 1760000000000 },
+          { "eventId": "ev_2", "status": "OUT_FOR_DELIVERY", "rawStatus": "out_for_delivery", "occurredAtMs": 1760040000000 }
+        ]
+      }
+    },
+    {
+      "name": "unknown status and missing time are dropped, the known event stays",
+      "shipment": {
+        "id": "shp_1",
+        "trackingNumber": "EC0001",
+        "events": [
+          { "id": "ev_1", "status": "teleported", "time": 1760000000 },
+          { "id": "ev_2", "status": "in_transit" },
+          { "id": "ev_3", "status": "delivered", "time": 1760090000 }
+        ]
+      },
+      "expected": {
+        "trackingNumber": "EC0001",
+        "estimatedDeliveryMs": null,
+        "events": [
+          { "eventId": "ev_3", "status": "DELIVERED", "rawStatus": "delivered", "occurredAtMs": 1760090000000 }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "descriptor": {
+    "name": "Example Carrier",
+    "description": "Siparişleri Example Carrier ile gönderin: canlı fiyatlar, etiketler ve takip."
+  },
+  "settings": {
+    "groups": {
+      "credentials": "Kimlik bilgileri",
+      "sender": "Gönderici ve koli",
+      "options": "Seçenekler"
+    },
+    "fields": {
+      "apiKey": {
+        "label": "API anahtarı",
+        "help": "Example Carrier hesabınızın geliştirici bölümündeki API anahtarı. Test modunda sandbox anahtarı kullanın."
+      },
+      "apiSecret": {
+        "label": "API gizli anahtarı",
+        "help": "API anahtarına ait gizli anahtar. Pano Market ikisini kısa ömürlü bir erişim jetonuyla değiştirir."
+      },
+      "webhookUrl": {
+        "label": "Webhook adresi",
+        "help": "Bu adresi Example Carrier hesabınıza takip webhook'u olarak ekleyin. Webhook imzalı değildir: Pano Market bir bildirime inanmadan önce gerçek durumu Example Carrier'dan sorar."
+      },
+      "labelFormat": {
+        "label": "Etiket biçimi",
+        "help": "PDF her yazıcıda basılır; ZPL termal etiket yazıcıları içindir.",
+        "options": {
+          "pdf": "PDF",
+          "zpl": "ZPL (termal yazıcı)"
+        }
+      }
+    },
+    "actions": {
+      "test-connection": {
+        "label": "Bağlantıyı test et"
+      }
+    }
+  },
+  "errors": {
+    "missing": "Bu alan zorunludur.",
+    "authentication": "Example Carrier API anahtarını veya gizli anahtarı reddetti.",
+    "unreachable": "Example Carrier'a ulaşılamadı. Biraz sonra tekrar deneyin."
+  },
+  "messages": {
+    "connectionOk": "Example Carrier bağlantısı çalışıyor."
+  }
+}

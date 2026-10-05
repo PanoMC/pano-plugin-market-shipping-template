@@ -1,0 +1,29 @@
+<h2>Example Carrier for Pano Market</h2>
+<p>
+  Example Carrier is a parcel carrier. This plugin adds it as a shipping provider to <strong>Pano Market</strong>, which must
+  be installed and running: it is a required dependency of this plugin.
+</p>
+<h3>What it supports</h3>
+<ul>
+  <li>Live shipping rates at checkout, with the services Example Carrier cannot offer for a parcel listed separately.</li>
+  <li>Buying a label from the Pano panel: PDF or ZPL for thermal printers, delivered at once or fetched a moment later.</li>
+  <li>Cancelling a label that has not been picked up yet.</li>
+  <li>Tracking: Pano Market asks Example Carrier for the state of open shipments, and a tracking webhook makes it ask sooner.</li>
+  <li>The prepaid balance of your Example Carrier account, shown before a label is bought.</li>
+  <li>Address validation and test mode against the Example Carrier sandbox.</li>
+  <li>One parcel per shipment.</li>
+</ul>
+<h3>Verification level</h3>
+<p>
+  Unverified: this plugin has not been tested against a live or sandbox Example Carrier account. Its tracking handling was
+  checked only with sample answers written from the documented protocol.
+</p>
+<h3>Setup</h3>
+<ol>
+  <li>Install Pano Market, then this plugin, and open Market, Shipping, Example Carrier in the panel.</li>
+  <li>Paste the API key and the API secret from the developer section of your Example Carrier account.</li>
+  <li>Fill in the sender address and the default parcel size.</li>
+  <li>Copy the webhook URL shown in the form into your Example Carrier account as a tracking webhook. The webhook is not
+    signed: Pano Market always asks Example Carrier for the real state before it believes a notification.</li>
+  <li>Press &ldquo;Test connection&rdquo;, then enable the carrier and bind a shipping method to one of its services.</li>
+</ol>

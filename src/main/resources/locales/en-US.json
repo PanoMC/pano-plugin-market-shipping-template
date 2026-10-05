@@ -1,0 +1,48 @@
+{
+  "descriptor": {
+    "name": "Example Carrier",
+    "description": "Ship orders with Example Carrier: live rates, labels and tracking."
+  },
+  "settings": {
+    "groups": {
+      "credentials": "Credentials",
+      "sender": "Sender and parcel",
+      "options": "Options"
+    },
+    "fields": {
+      "apiKey": {
+        "label": "API key",
+        "help": "API key from the developer section of your Example Carrier account. Use a sandbox key together with test mode."
+      },
+      "apiSecret": {
+        "label": "API secret",
+        "help": "The secret that belongs to the API key. Pano Market exchanges both for a short-lived access token."
+      },
+      "webhookUrl": {
+        "label": "Webhook URL",
+        "help": "Add this URL as a tracking webhook in your Example Carrier account. The webhook is not signed: Pano Market asks Example Carrier for the real state before it believes a notification."
+      },
+      "labelFormat": {
+        "label": "Label format",
+        "help": "PDF prints on any printer; ZPL is for thermal label printers.",
+        "options": {
+          "pdf": "PDF",
+          "zpl": "ZPL (thermal printer)"
+        }
+      }
+    },
+    "actions": {
+      "test-connection": {
+        "label": "Test connection"
+      }
+    }
+  },
+  "errors": {
+    "missing": "This field is required.",
+    "authentication": "Example Carrier rejected the API key or secret.",
+    "unreachable": "Example Carrier could not be reached. Try again in a moment."
+  },
+  "messages": {
+    "connectionOk": "The connection to Example Carrier works."
+  }
+}

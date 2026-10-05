@@ -1,0 +1,9 @@
+.gradle
+build
+.kotlin
+.idea
+.deps
+node_modules
+.DS_Store
+src/main/resources/plugin-ui
+src/main/resources/*.zip

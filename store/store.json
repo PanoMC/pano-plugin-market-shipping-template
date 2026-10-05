@@ -1,0 +1,12 @@
+{
+  "id": "pano-plugin-market-example",
+  "name": "Market Shipping: Example Carrier",
+  "type": "PLUGIN",
+  "category": "TOOLS_AND_UTILITIES",
+  "license": "MIT",
+  "shortDescription": "Ship Pano Market orders with Example Carrier: rates, labels and tracking.",
+  "descriptionFile": "description.html",
+  "customLinks": { "Documentation": "https://panomc.com/docs" },
+  "priceDev": 5,
+  "icon": "../src/main/resources/logo.png"
+}

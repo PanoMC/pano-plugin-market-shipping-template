@@ -1,0 +1,11 @@
+{
+  "level": "UNVERIFIED",
+  "evidence": [
+    {
+      "what": "tracking response",
+      "kind": "SELF_DERIVED",
+      "vector": "vectors/tracking.json"
+    }
+  ],
+  "sandbox": null
+}

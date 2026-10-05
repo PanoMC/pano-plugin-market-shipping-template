@@ -1,0 +1,21 @@
+{
+  "extends": "semantic-release-monorepo",
+  "branches": [{ "name": "dev", "prerelease": true }, "main"],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    ["@PanoMC/semantic-release-pano", {
+      "file": "build/libs/pano-plugin-market-example-${version}.jar",
+      "panoVersion": "1.0.0",
+      "configs": [
+        { "resourceId": "pano-plugin-market-example", "panoUrl": "https://api-dev.panomc.com", "tokenVar": "PANO_TOKEN", "branches": ["dev"] },
+        { "resourceId": "pano-plugin-market-example", "panoUrl": "https://api.panomc.com", "tokenVar": "PANO_PROD_TOKEN", "branches": ["main"] }
+      ]
+    }],
+    ["@semantic-release/github", {
+      "assets": [{ "path": "build/libs/pano-plugin-market-example-*.jar", "label": false }],
+      "successComment": false, "failComment": false, "releasedLabels": false
+    }]
+  ],
+  "repositoryUrl": "https://github.com/PanoMC/pano-plugin-market-shipping.git"
+}

@@ -1,0 +1,48 @@
+{
+  "descriptor": {
+    "name": "Example Carrier",
+    "description": "Отправляйте заказы через Example Carrier: актуальные тарифы, этикетки и отслеживание."
+  },
+  "settings": {
+    "groups": {
+      "credentials": "Учётные данные",
+      "sender": "Отправитель и посылка",
+      "options": "Параметры"
+    },
+    "fields": {
+      "apiKey": {
+        "label": "API-ключ",
+        "help": "API-ключ из раздела разработчика в вашем аккаунте Example Carrier. В тестовом режиме используйте ключ песочницы."
+      },
+      "apiSecret": {
+        "label": "API-секрет",
+        "help": "Секрет, относящийся к API-ключу. Pano Market обменивает оба на короткоживущий токен доступа."
+      },
+      "webhookUrl": {
+        "label": "URL вебхука",
+        "help": "Добавьте этот URL как вебхук отслеживания в аккаунте Example Carrier. Вебхук не подписан: прежде чем поверить уведомлению, Pano Market запрашивает реальное состояние у Example Carrier."
+      },
+      "labelFormat": {
+        "label": "Формат этикетки",
+        "help": "PDF печатается на любом принтере; ZPL предназначен для термопринтеров этикеток.",
+        "options": {
+          "pdf": "PDF",
+          "zpl": "ZPL (термопринтер)"
+        }
+      }
+    },
+    "actions": {
+      "test-connection": {
+        "label": "Проверить соединение"
+      }
+    }
+  },
+  "errors": {
+    "missing": "Это поле обязательно.",
+    "authentication": "Example Carrier отклонил API-ключ или секрет.",
+    "unreachable": "Не удалось связаться с Example Carrier. Повторите попытку чуть позже."
+  },
+  "messages": {
+    "connectionOk": "Соединение с Example Carrier работает."
+  }
+}

@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # Standalone build: the platform and the market API jar come from their GitHub releases (Ivy repositories).
+      - name: Build (compile, tests, checkImports, verifyPluginJar)
+        run: ./gradlew build --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reports
+          path: |
+            build/libs/*.jar
+            build/reports/tests/**
+            build/test-results/**
+
+  rename-smoke:
+    name: scripts/rename.sh produces a building plugin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Rename a copy and build it
+        run: |
+          set -euo pipefail
+          chmod +x ./gradlew scripts/rename.sh
+          copy="$(mktemp -d)/foo-bar"
+          mkdir -p "$copy"
+          git ls-files -z | xargs -0 -I{} cp --parents {} "$copy"
+          cd "$copy"
+          ./scripts/rename.sh foo-bar "Foo Bar"
+          # the template-only job must not survive in a renamed repository (it would fail there on every push)
+          ! grep -rq rename-smoke .github/workflows
+          grep -q '^  build:' .github/workflows/ci.yml
+          test -f src/main/kotlin/com/panomc/plugins/marketship/foobar/FooBarProvider.kt
+          ./gradlew build --no-daemon
+          ls build/libs/pano-plugin-market-foo-bar-*.jar
