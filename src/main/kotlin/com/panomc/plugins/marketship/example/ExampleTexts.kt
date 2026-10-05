@@ -9,7 +9,7 @@ import com.panomc.plugins.market.spi.common.LocalizedText
  * from the SPI helpers `senderAddress()` / `defaultParcel()` and carry their own literal translations.
  */
 object ExampleTexts {
-    const val PLUGIN_ID = "pano-plugin-market-example"
+    const val PLUGIN_ID = "pano-plugin-market-shipping-example"
 
     private val registry = ArrayList<LocalizedText>()
 

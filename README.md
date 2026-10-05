@@ -37,17 +37,17 @@ scripts/rename.sh my-carrier "My Carrier"   # once, in a fresh copy
 ./gradlew build
 ```
 
-The slug is lower case letters, digits and single hyphens, 2 to 29 characters, starting with a letter. It becomes:
+The slug is lower case letters, digits and single hyphens, 2 to 20 characters, starting with a letter. It becomes:
 
 | Thing | Value for `my-carrier` |
 |---|---|
 | provider id | `my-carrier` |
-| plugin id, store resource id, jar name | `pano-plugin-market-my-carrier` |
+| plugin id, store resource id, jar name | `pano-plugin-market-shipping-my-carrier` |
 | root package | `com.panomc.plugins.marketship.mycarrier` |
 | classes | `MyCarrierPlugin`, `MyCarrierExtension`, `MyCarrierProvider`, ... |
-| i18n namespace | `plugins.pano-plugin-market-my-carrier.*` |
+| i18n namespace | `plugins.pano-plugin-market-shipping-my-carrier.*` |
 
-The jar is `build/libs/pano-plugin-market-my-carrier-<version>.jar`. Put it into the `plugins` folder of a Pano that has
+The jar is `build/libs/pano-plugin-market-shipping-my-carrier-<version>.jar`. Put it into the `plugins` folder of a Pano that has
 Pano Market installed. The store resource is named `Market Shipping: <name>`.
 
 ## How dependencies resolve

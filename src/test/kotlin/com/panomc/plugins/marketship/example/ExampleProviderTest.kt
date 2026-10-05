@@ -31,7 +31,13 @@ class ExampleProviderTest {
     fun `S-02 id, plugin id, descriptor and logo`() = env<Unit> { env ->
         val provider = env.provider
         assertTrue(Regex("^[a-z0-9-]{2,29}$").matches(provider.id), "provider id '${provider.id}'")
-        assertEquals("pano-plugin-market-${provider.id}", ExampleTexts.PLUGIN_ID)
+        // 16 section 2.2: a shipping plugin id is pano-plugin-market-shipping-<slug>, never the payment shape pano-plugin-market-<slug>
+        assertEquals("pano-plugin-market-shipping-${provider.id}", ExampleTexts.PLUGIN_ID)
+        assertTrue(ExampleTexts.PLUGIN_ID.startsWith("pano-plugin-market-shipping-"), "plugin id '${ExampleTexts.PLUGIN_ID}' must start with pano-plugin-market-shipping-")
+        assertTrue(provider.id.length in 2..20, "shipping slug '${provider.id}' must be 2 to 20 characters")
+        val properties = java.util.Properties().also { props -> File("gradle.properties").inputStream().use { props.load(it) } }
+        assertEquals(properties.getProperty("pluginId"), ExampleTexts.PLUGIN_ID, "ExampleTexts.PLUGIN_ID must equal pluginId of gradle.properties")
+        assertEquals(ExampleTexts.PLUGIN_ID, JsonObject(File("store/store.json").readText()).getString("id"), "store resource id must equal the plugin id")
         assertTrue(ExampleTexts.PLUGIN_ID.length <= 48, "plugin id '${ExampleTexts.PLUGIN_ID}' is longer than the 48 characters of the store")
         val descriptor = provider.descriptor
         assertTrue(descriptor.icon.startsWith("fa-"), "icon is a FontAwesome class")

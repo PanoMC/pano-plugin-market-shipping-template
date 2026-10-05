@@ -1,1 +1,1 @@
-rootProject.name = "pano-plugin-market-example"
+rootProject.name = "pano-plugin-market-shipping-example"

@@ -5,7 +5,7 @@
 #
 # Run it once, in a fresh copy of the template, before you change anything else. It renames in place:
 #   provider id            example                          -> <slug>
-#   plugin id / jar name   pano-plugin-market-example        -> pano-plugin-market-<slug>
+#   plugin id / jar name   pano-plugin-market-shipping-example -> pano-plugin-market-shipping-<slug>
 #   root package           com.panomc.plugins.marketship.example -> com.panomc.plugins.marketship.<pkg>  (<pkg> = slug without hyphens)
 #   classes                Example*                          -> <Cls>*                                    (<Cls> = slug in PascalCase)
 #   display name           Example Carrier                   -> <Display name>
@@ -17,7 +17,7 @@ set -euo pipefail
 
 usage() {
   echo "usage: scripts/rename.sh <slug> \"<Display name>\"" >&2
-  echo "  slug: lower-case letters, digits and single hyphens, 2-29 characters, starting with a letter" >&2
+  echo "  slug: lower-case letters, digits and single hyphens, 2-20 characters, starting with a letter" >&2
   exit 2
 }
 
@@ -29,11 +29,11 @@ die() { echo "rename.sh: $*" >&2; exit 1; }
 
 # ---- validate ---------------------------------------------------------------------------------------------------------
 [[ "$slug" =~ ^[a-z][a-z0-9]*(-[a-z0-9]+)*$ ]] || die "slug '$slug' must match [a-z][a-z0-9]*(-[a-z0-9]+)* (it becomes a Kotlin package and class name, so it starts with a letter)"
-[ ${#slug} -ge 2 ] && [ ${#slug} -le 29 ] || die "slug '$slug' must be 2 to 29 characters long (the plugin id pano-plugin-market-<slug> may have at most 48)"
+[ ${#slug} -ge 2 ] && [ ${#slug} -le 20 ] || die "slug '$slug' must be 2 to 20 characters long (the plugin id pano-plugin-market-shipping-<slug> may have at most 48)"
 [[ ! "$slug" =~ -v[0-9] ]] || die "slug '$slug' must not contain '-v<digit>' (it would break the <slug>-v<version> git tags)"
 [ "$slug" != "example" ] || die "the slug 'example' is the template itself; pick the carrier's name"
 [ -n "$display" ] || die "the display name must not be empty"
-[ ${#display} -le 40 ] || die "the display name must be at most 40 characters (the store name 'Market: <name>' is limited to 64)"
+[ ${#display} -le 40 ] || die "the display name must be at most 40 characters (the store name 'Market Shipping: <name>' is limited to 64)"
 case "$display" in
   *'"'*|*'\'*|*'/'*|*'|'*|*'$'*|*'`'*|*$'\n'*|*$'\r'*|*$'\t'*) die "the display name must not contain  \" \\ / | \$ \` or control characters" ;;
 esac
@@ -41,7 +41,7 @@ esac
 cd "$(dirname "$0")/.."
 [ -f gradle.properties ] && [ -d src/main/kotlin/com/panomc/plugins/marketship/example ] || die "this does not look like an unrenamed template (no src/main/kotlin/com/panomc/plugins/marketship/example)"
 
-pluginId="pano-plugin-market-$slug"
+pluginId="pano-plugin-market-shipping-$slug"
 pkg=${slug//-/}
 cls=""
 IFS='-' read -ra parts <<< "$slug"
@@ -68,7 +68,7 @@ done
 # ---- text replacement (order is normative, spec 16 section 4.3) -----------------------------------------------------------
 rewrite() {
   sed -i \
-    -e "s|pano-plugin-market-example|$pluginId|g" \
+    -e "s|pano-plugin-market-shipping-example|$pluginId|g" \
     -e "s|marketship\\.example|marketship.$pkg|g" \
     -e "s|Example Carrier|$displayEsc|g" \
     -e "s|Example|$cls|g" \

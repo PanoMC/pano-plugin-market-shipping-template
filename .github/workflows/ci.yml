@@ -65,4 +65,4 @@ jobs:
           grep -q '^  build:' .github/workflows/ci.yml
           test -f src/main/kotlin/com/panomc/plugins/marketship/foobar/FooBarProvider.kt
           ./gradlew build --no-daemon
-          ls build/libs/pano-plugin-market-foo-bar-*.jar
+          ls build/libs/pano-plugin-market-shipping-foo-bar-*.jar
