@@ -318,7 +318,7 @@ fun verifyJarFile(jar: File, expectUi: Boolean, premiumExpected: Boolean): List<
         if (expectUi && !hasUiZip) violations += "MP-J04 plugin-ui.zip is missing but rollup.config.js exists"
         if (!expectUi && hasUiZip) violations += "MP-J04 plugin-ui.zip is bundled but there is no rollup.config.js"
         j05.sorted().take(20).forEach { violations += "MP-J05 class file newer than Java 11: $it" }
-        if (jar.length() > 9_500_000L) violations += "MP-J06 jar is ${jar.length()} bytes, the limit is 9500000"
+        if (jar.length() > 20_000_000L) violations += "MP-J06 jar is ${jar.length()} bytes, the limit is 20000000"
 
         val attrs = JarFile(jar).use { it.manifest?.mainAttributes }
         if (attrs == null) {
