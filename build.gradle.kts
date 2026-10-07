@@ -426,8 +426,13 @@ internal object PluginBuildConstants {
             }
         }
 
-        register("buildUI", Exec::class) {
+        register("installUIDependencies", Exec::class) {
             dependsOn("installBun")
+            commandLine(bunBin.absolutePath, "install")
+        }
+
+        register("buildUI", Exec::class) {
+            dependsOn("installUIDependencies")
             commandLine(bunBin.absolutePath, "run", "build")
         }
 
