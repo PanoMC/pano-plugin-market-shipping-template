@@ -79,8 +79,15 @@ rewrite() {
 while IFS= read -r file; do
   rewrite "$file"
 done < <(find src store .github settings.gradle.kts gradle.properties package.json .releaserc.json VERIFICATION.md \
-           -type f \( -name '*.kt' -o -name '*.json' -o -name '*.conf' -o -name '*.md' -o -name '*.yml' -o -name '*.html' -o -name '*.kts' -o -name '*.properties' \) \
+           -type f \( -name '*.kt' -o -name '*.json' -o -name '*.conf' -o -name '*.md' -o -name '*.yml' -o -name '*.html' -o -name '*.kts' -o -name '*.properties' -o -name '*.svelte' -o -name '*.js' \) \
            ! -path 'src/main/kotlin/com/panomc/plugins/license/*' 2>/dev/null)
+
+# ---- the UI: the namespace of the example slot view (plugin id minus `pano-plugin-`) and its semantic classes -------------------
+# `plugin('market-shipping-example')` and the `market-shipping-example-...` classes follow the plugin id; the build lock of the template is not the new plugin's.
+while IFS= read -r file; do
+  sed -i -e "s|market-shipping-example\\b|market-shipping-$slug|g" "$file"
+done < <(find src/theme -type f \( -name '*.svelte' -o -name '*.js' \) 2>/dev/null)
+rm -f pano-plugin.lock.json
 
 # ---- the template's own CI job -------------------------------------------------------------------------------------------------
 # `rename-smoke` renames a copy of the unrenamed template; in a renamed repository it would hit the guard above and fail on every
@@ -103,13 +110,6 @@ sed -i \
   -e "s|^pluginSourceUrl=.*|pluginSourceUrl=|" \
   gradle.properties
 
-cat > package.json <<JSON
-{
-  "name": "$slug",
-  "private": true,
-  "version": "0.0.0"
-}
-JSON
 
 # A standalone repository releases with plain semantic-release; the upload to the store is the optional second step.
 cat > .releaserc.json <<JSON

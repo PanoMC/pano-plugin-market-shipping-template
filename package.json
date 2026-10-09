@@ -1,5 +1,27 @@
 {
   "name": "example",
   "private": true,
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "node": "./server/server.mjs",
+      "default": "./client/client.mjs"
+    }
+  },
+  "scripts": {
+    "build": "cross-env DEV=false rollup -c",
+    "dev": "cross-env DEV=true rollup -c --watch",
+    "check": "pano-plugin check --strict --styles badge"
+  },
+  "devDependencies": {
+    "@panomc/plugin-kit": "file:../../../theme-core/packages/plugin-kit",
+    "@panomc/sdk": "1.0.0-dev.57",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "cross-env": "^10.1.0",
+    "rollup": "^4.32.1",
+    "rollup-plugin-delete": "^2.1.0",
+    "rollup-plugin-svelte": "^7.2.2"
+  }
 }

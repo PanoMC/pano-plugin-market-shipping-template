@@ -7,6 +7,7 @@ import java.security.KeyFactory
 import java.security.interfaces.RSAPublicKey
 import java.security.spec.X509EncodedKeySpec
 import java.util.Base64
+import java.util.Properties
 import java.util.jar.JarFile
 import java.util.zip.ZipFile
 
@@ -31,6 +32,21 @@ val hasUi = file("rollup.config.js").exists()
 val panoJar = prop("panoJar").ifEmpty { System.getenv("PANO_PLATFORM_JAR").orEmpty() }
 val marketApiJar = prop("marketApiJar").ifEmpty { System.getenv("MARKET_API_JAR").orEmpty() }
 val panoSource = prop("panoSource").ifEmpty { "github" }      // github | jitpack
+
+// api-level (pano-api migrate-v1): "panoApiLevel" of the pano-web-platform tree this plugin is built in, else "current" from
+// the pano-api-level.properties inside the Pano jar on compileClasspath. `apiLevel=` in gradle.properties lowers it.
+val panoApiLevel: String? by lazy {
+    (findProperty("apiLevel") as String?)
+        ?: (rootProject.findProperty("panoApiLevel") as String?)
+        ?: configurations.findByName("compileClasspath")?.files?.firstNotNullOfOrNull { jar ->
+            if (!jar.isFile || !jar.name.endsWith(".jar")) null
+            else ZipFile(jar).use { zip ->
+                zip.getEntry("pano-api-level.properties")?.let { entry ->
+                    Properties().apply { load(zip.getInputStream(entry)) }.getProperty("current")
+                }
+            }
+        }
+}
 
 val marketSpiKind = when {
     rootPackage.contains(".marketpay.") -> "payment"
@@ -457,6 +473,7 @@ internal object PluginBuildConstants {
     shadowJar {
         manifest {
             attributes["id"] = pluginId
+            panoApiLevel?.let { attributes["api-level"] = it }
             attributes["name"] = prop("pluginName")
             prop("pluginDescription").takeIf { it.isNotEmpty() }?.let { attributes["description"] = it }
             attributes["pano-version"] = prop("pluginPanoVersion")

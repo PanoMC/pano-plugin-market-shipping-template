@@ -112,6 +112,24 @@ exists in `src/main/resources/locales/en-US.json`, `tr.json` and `ru.json`. `Loc
 missing in one file, when the files differ, when a value is empty, when an English text differs from its fallback in the
 code, or when a key is not used by anything.
 
+## The slot view (optional UI)
+
+`src/theme/views/ShippingNote.svelte` is a complete example of a view a carrier plugin puts into the Market's checkout: one file,
+and its `<script module>` says where it goes.
+
+```svelte
+<script module>
+  export const view = { slot: 'market:checkout:shipping', id: "example" };
+</script>
+```
+
+The Market renders the slot with `quote`, `methodId`, `address` and `onchange` (call it with a patch of the checkout draft, e.g.
+`{ shippingMethodId }`) and shows every item, so compare `methodId` first when the carrier owns only some of the methods;
+a pickup point picker starts from this view. The build is the kit preset in `rollup.config.js` (`bun run build`,
+`bunx pano-plugin check --strict --styles badge`); a plugin that needs no UI deletes `rollup.config.js`, the `package.json`
+dependencies and `src/theme/`, and builds as a Kotlin-only plugin. `scripts/rename.sh` renames the namespace of the view along
+with the rest.
+
 ## Testing
 
 ```sh
