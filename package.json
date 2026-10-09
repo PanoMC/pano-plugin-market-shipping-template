@@ -15,8 +15,8 @@
     "check": "pano-plugin check --strict --styles badge"
   },
   "devDependencies": {
-    "@panomc/plugin-kit": "file:../../../theme-core/packages/plugin-kit",
-    "@panomc/sdk": "1.0.0-dev.57",
+    "@panomc/plugin-kit": "1.0.0-dev.62",
+    "@panomc/sdk": "2.0.0-dev.62",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "cross-env": "^10.1.0",
