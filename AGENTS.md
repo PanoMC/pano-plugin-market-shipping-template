@@ -17,3 +17,11 @@ The three rules you will break first:
 2. Declare relative API paths only; Pano serves them at `/api/plugins/<pluginId>/...` and `/api/plugins/<pluginId>/panel/...`. Lists answer `{ items }` (+ `{ page }` when paged), errors `{ error: { code } }` (`plugin-api.md`).
 3. Do not add features by hand to generated output: `pano-boilerplate-plugin` is what `pano-plugin new` writes, its template is `theme-core/packages/plugin-kit/bin/templates/plugin/` (`plugin-new.md`).
 <!-- pano-agent-guide:end -->
+
+<!-- pano-design-guidelines:start -->
+## Panel design guidelines
+
+Before designing or changing any panel UI (pages, components, modals, alerts, forms…), read
+`design/README.md` and then **only** the topic file it points to for what you are building. These
+rules are mandatory. Do not load every file in `design/`.
+<!-- pano-design-guidelines:end -->
