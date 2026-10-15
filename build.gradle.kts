@@ -417,7 +417,7 @@ internal object PluginBuildConstants {
             isLinux && isAarch64 -> "bun-linux-aarch64"
             else -> throw RuntimeException("Unsupported OS or Architecture")
         }
-        val bunVersion = "1.2.0"
+        val bunVersion = "1.4.3"
         val bunUrl = "https://github.com/oven-sh/bun/releases/download/bun-v$bunVersion/$bunPlatform.zip"
         val bunDir = File(layout.buildDirectory.asFile.get().absolutePath, "bun")
         val bunBinDir = File(bunDir, bunPlatform)

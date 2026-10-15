@@ -17,11 +17,11 @@
   "devDependencies": {
     "@panomc/plugin-kit": "1.0.0-dev.62",
     "@panomc/sdk": "2.0.0-dev.62",
-    "@rollup/plugin-node-resolve": "^16.0.0",
-    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
     "cross-env": "^10.1.0",
-    "rollup": "^4.32.1",
-    "rollup-plugin-delete": "^2.1.0",
-    "rollup-plugin-svelte": "^7.2.2"
+    "rollup": "^4.64.7",
+    "rollup-plugin-delete": "^3.0.2",
+    "rollup-plugin-svelte": "^7.2.3"
   }
 }
