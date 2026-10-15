@@ -72,6 +72,7 @@ repositories {
 val hostLibs = listOf(
     "org.pf4j:pf4j:${prop("pf4jVersion")}",
     "io.vertx:vertx-core:${prop("vertxVersion")}",
+    "io.vertx:vertx-codegen-api:${prop("vertxVersion")}", // Kotlin 2.4 needs the Nullable annotation of Vert.x types
     "io.vertx:vertx-web:${prop("vertxVersion")}",
     "io.vertx:vertx-web-client:${prop("vertxVersion")}",
     "io.vertx:vertx-lang-kotlin:${prop("vertxVersion")}",
