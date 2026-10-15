@@ -13,7 +13,7 @@ import java.util.zip.ZipFile
 
 plugins {
     kotlin("jvm") version "2.4.21"            // must equal pano-web-platform/build.gradle.kts
-    id("com.gradleup.shadow") version "8.3.8"
+    id("com.gradleup.shadow") version "9.6.1"
 }
 
 group = "com.panomc.plugins"
@@ -110,7 +110,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${prop("junitVersion")}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${prop("junitVersion")}")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.13.3")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.14.4")
 }
 
 // ---------------------------------------------------------------------------------------------
