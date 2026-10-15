@@ -91,7 +91,7 @@ dependencies {
             ?: throw GradleException("MP-B01: pano-plugin-market must be checked out under plugins/ to build $pluginId")
         evaluationDependsOn(market.path)
         compileOnly(project(":Pano")); testCompileOnly(project(":Pano"))
-        compileOnly(market)
+        compileOnly(project(market.path))
         // Classes only (no resources, so no bun build of market's UI and no dependency on market's disabled jar task).
         testImplementation(market.extensions.getByType<SourceSetContainer>()["main"].output.classesDirs)
     } else {
