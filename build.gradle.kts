@@ -12,7 +12,7 @@ import java.util.jar.JarFile
 import java.util.zip.ZipFile
 
 plugins {
-    kotlin("jvm") version "2.2.21"            // must equal pano-web-platform/build.gradle.kts
+    kotlin("jvm") version "2.4.21"            // must equal pano-web-platform/build.gradle.kts
     id("com.gradleup.shadow") version "8.3.8"
 }
 
