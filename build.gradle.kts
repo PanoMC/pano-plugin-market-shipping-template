@@ -411,6 +411,7 @@ internal object PluginBuildConstants {
     if (hasUi) {
         val bunPlatform = when {
             isWindows && isX64 -> "bun-windows-x64"
+            isWindows && isAarch64 -> "bun-windows-aarch64"
             isMac && isX64 -> "bun-darwin-x64"
             isMac && isAarch64 -> "bun-darwin-aarch64"
             isLinux && isX64 -> "bun-linux-x64"
