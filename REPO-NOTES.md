@@ -1,4 +1,6 @@
-# Agent brief — <Display name> (`<slug>`)
+# Repository notes
+
+Notes for agents and people working in this repository. `AGENTS.md` routes here.
 
 Read first, in this order: this file → `pano-market-plugin-spec/shipping/<slug>.md` (or the carrier's section of
 `global-carriers.md` / `tr-carriers.md` / `aggregators.md`; the only source of protocol truth, do not browse beyond it
