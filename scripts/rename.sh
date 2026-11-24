@@ -10,7 +10,7 @@
 #   classes                Example*                          -> <Cls>*                                    (<Cls> = slug in PascalCase)
 #   display name           Example Carrier                   -> <Display name>
 # and rewrites package.json, .releaserc.json, store/store.json, gradle.properties (description, source URL), README.md
-# (a short stub) and AGENT.md (placeholders), and removes the template-only `rename-smoke` job from .github/workflows/ci.yml.
+# (a short stub) and REPO-NOTES.md (placeholders), and removes the template-only `rename-smoke` job from .github/workflows/ci.yml.
 # build.gradle.kts, the license package, LICENSE, gradle/ and scripts/ are never touched.
 # Needs bash and GNU sed (Linux, WSL, Git Bash).
 set -euo pipefail
@@ -144,20 +144,20 @@ Pano Market shipping template with \`scripts/rename.sh\`.
 ./gradlew build      # compile, test, build and verify build/libs/$pluginId-<version>.jar
 \`\`\`
 
-Read \`AGENT.md\` for what to implement and in which order. The class layout, the gates of the build and the rules a provider
+Read \`REPO-NOTES.md\` for what to implement and in which order. The class layout, the gates of the build and the rules a provider
 must keep are the ones of the template; its README (https://github.com/PanoMC/pano-plugin-market-shipping-template) explains them.
 
 The code still talks to the imaginary "Example Carrier" protocol of the template (\`$cls*.kt\`, \`src/test/resources/vectors\`):
 replace it with the real carrier protocol, then update \`VERIFICATION.md\`, \`store/description.html\` and the locale files.
 MD
 
-# AGENT.md holds placeholders instead of names
+# REPO-NOTES.md holds placeholders instead of names
 sed -i \
   -e "s|<Display name>|$displayEsc|g" \
   -e "s|<slug>|$slug|g" \
   -e "s|<plugin id>|$pluginId|g" \
   -e "s|<package>|com.panomc.plugins.marketship.$pkg|g" \
   -e "s|<Cls>|$cls|g" \
-  AGENT.md
+  REPO-NOTES.md
 
-echo "done. Next: ./gradlew build, then replace the example protocol with the carrier's (see AGENT.md)."
+echo "done. Next: ./gradlew build, then replace the example protocol with the carrier's (see REPO-NOTES.md)."
