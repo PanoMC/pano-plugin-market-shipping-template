@@ -57,7 +57,7 @@ jobs:
           chmod +x ./gradlew scripts/rename.sh
           copy="$(mktemp -d)/foo-bar"
           mkdir -p "$copy"
-          git ls-files -z | xargs -0 -I{} cp --parents {} "$copy"
+          git ls-files -z | xargs -0 -I{} cp -r --parents {} "$copy"
           cd "$copy"
           ./scripts/rename.sh foo-bar "Foo Bar"
           # the template-only job must not survive in a renamed repository (it would fail there on every push)
