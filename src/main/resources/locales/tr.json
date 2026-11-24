@@ -16,7 +16,7 @@
       },
       "apiSecret": {
         "label": "API gizli anahtarı",
-        "help": "API anahtarına ait gizli anahtar. Pano Market ikisini kısa ömürlü bir erişim jetonuyla değiştirir."
+        "help": "API anahtarına ait gizli anahtar. Pano Market ikisini kısa ömürlü bir erişim belirteciyle değiştirir."
       },
       "webhookUrl": {
         "label": "Webhook adresi",
